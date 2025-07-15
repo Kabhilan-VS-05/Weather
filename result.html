@@ -208,19 +208,19 @@ document.getElementById('lonValue').textContent = lon || '--';
 
       if ([0, 1].includes(code)) {
         desc = "Clear Sky"; icon = "bi-sun-fill";
-        bg = "linear-gradient(to right, #f7b733, #fc4a1a)";
+        bg = "linear-gradient(135deg, #0f2027, #203a43, #2c5364)";
       } else if ([2, 3].includes(code)) {
         desc = "Cloudy"; icon = "bi-cloud-sun-fill";
-        bg = "linear-gradient(to right, #bdc3c7, #2c3e50)";
+        bg = "linear-gradient(135deg, #0f2027, #203a43, #2c5364)";
       } else if ([45, 48].includes(code)) {
         desc = "Foggy"; icon = "bi-cloud-fog2-fill";
-        bg = "linear-gradient(to right, #757f9a, #d7dde8)";
+        bg = "linear-gradient(135deg, #0f2027, #203a43, #2c5364)";
       } else if ([51, 61, 63, 65].includes(code)) {
         desc = "Rainy"; icon = "bi-cloud-rain-fill";
-        bg = "linear-gradient(to right, #0052D4, #4364F7, #6FB1FC)";
+        bg = "linear-gradient(135deg, #0f2027, #203a43, #2c5364)";
       } else if ([71, 73, 75].includes(code)) {
         desc = "Snowy"; icon = "bi-cloud-snow-fill";
-        bg = "linear-gradient(to right, #83a4d4, #b6fbff)";
+        bg = "linear-gradient(135deg, #0f2027, #203a43, #2c5364)";
       }
 
       document.getElementById('description').textContent = desc;

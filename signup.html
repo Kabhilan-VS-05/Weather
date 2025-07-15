@@ -55,6 +55,14 @@
       color: #000;
     }
 
+    .form-control.is-valid {
+      border-color: #198754 !important;
+    }
+
+    .form-control.is-invalid {
+      border-color: #dc3545 !important;
+    }
+
     .progress {
       height: 12px;
       margin-top: 10px;
@@ -64,23 +72,18 @@
       background-color: cyan;
     }
 
-    a {
-      color: cyan;
-    }
-
-    a:hover {
-      color: rgb(1, 146, 175);
-    }
-
     .progress-label {
       font-size: 0.85rem;
       text-align: right;
       color: #80dfff;
     }
 
-    .age-value {
-      font-weight: bold;
+    a {
       color: cyan;
+    }
+
+    a:hover {
+      color: rgb(1, 146, 175);
     }
   </style>
 </head>
@@ -98,27 +101,39 @@
       <div class="mb-3">
         <label for="name" class="form-label">Full Name</label>
         <input type="text" class="form-control" id="name" required>
+        <div class="invalid-feedback">Please enter your full name.</div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
+
       <div class="mb-3">
         <label for="email" class="form-label">Email Address</label>
         <input type="email" class="form-control" id="email" required>
+        <div class="invalid-feedback">Enter a valid email address.</div>
+        <div class="valid-feedback">Email looks good!</div>
       </div>
+
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" id="username" required>
+        <div class="invalid-feedback">Username is required.</div>
+        <div class="valid-feedback">Valid username!</div>
       </div>
+
       <div class="mb-3">
         <label for="signupPassword" class="form-label">Password</label>
         <input type="password" class="form-control" id="signupPassword" required>
+        <div class="invalid-feedback">Please enter a password.</div>
+        <div class="valid-feedback">Password accepted!</div>
       </div>
 
-      <!-- Age Range with Live Display -->
-      <div class="mb-4">
-        <label for="ageRange" class="form-label">Select Age: <span class="age-value" id="ageDisplay">25</span></label>
-        <input type="range" class="form-range" id="ageRange" min="10" max="60" value="25" step="1">
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" required>
+        <div class="invalid-feedback">Passwords do not match.</div>
+        <div class="valid-feedback">Passwords match!</div>
       </div>
 
-      <!-- Progress Bar and Label -->
+      <!-- Password Strength Progress -->
       <div class="progress">
         <div class="progress-bar" role="progressbar" id="signupProgress" style="width: 0%"></div>
       </div>
@@ -130,27 +145,69 @@
   </div>
 
   <script>
-    const signupFields = ['name', 'email', 'username', 'signupPassword'];
-    const signupProgress = document.getElementById('signupProgress');
-    const progressLabel = document.getElementById('progressLabel');
+    const form = document.getElementById("signupForm");
 
-    signupFields.forEach(id => {
-      document.getElementById(id).addEventListener('input', updateSignupProgress);
-    });
+    const fields = {
+      name: document.getElementById("name"),
+      email: document.getElementById("email"),
+      username: document.getElementById("username"),
+      password: document.getElementById("signupPassword"),
+      confirmPassword: document.getElementById("confirmPassword")
+    };
 
-    function updateSignupProgress() {
-      const filled = signupFields.filter(id => document.getElementById(id).value.trim() !== '').length;
-      const percent = Math.round((filled / signupFields.length) * 100);
-      signupProgress.style.width = percent + '%';
-      progressLabel.textContent = percent + '%';
+    const progressBar = document.getElementById("signupProgress");
+    const progressLabel = document.getElementById("progressLabel");
+
+    // Password strength checker
+    function checkPasswordStrength(password) {
+      let strength = 0;
+      if (password.length >= 8) strength += 1;
+      if (/[a-z]/.test(password)) strength += 1;
+      if (/[A-Z]/.test(password)) strength += 1;
+      if (/[0-9]/.test(password)) strength += 1;
+      if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+      return (strength / 5) * 100;
     }
 
-    // Age Range Live Display
-    const ageRange = document.getElementById('ageRange');
-    const ageDisplay = document.getElementById('ageDisplay');
+    function updateValidation() {
+      let isFormValid = true;
 
-    ageRange.addEventListener('input', () => {
-      ageDisplay.textContent = ageRange.value;
+      Object.values(fields).forEach(input => {
+        const value = input.value.trim();
+        if (value === "") {
+          input.classList.add("is-invalid");
+          input.classList.remove("is-valid");
+          isFormValid = false;
+        } else {
+          input.classList.remove("is-invalid");
+          input.classList.add("is-valid");
+        }
+      });
+
+      // Confirm password check
+      if (fields.password.value !== fields.confirmPassword.value || fields.confirmPassword.value === "") {
+        fields.confirmPassword.classList.add("is-invalid");
+        fields.confirmPassword.classList.remove("is-valid");
+        isFormValid = false;
+      }
+
+      // Update password strength bar
+      const strengthPercent = checkPasswordStrength(fields.password.value);
+      progressBar.style.width = strengthPercent + "%";
+      progressLabel.textContent = Math.round(strengthPercent) + "%";
+
+      return isFormValid;
+    }
+
+    Object.values(fields).forEach(input => {
+      input.addEventListener("input", updateValidation);
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (updateValidation()) {
+        window.location.href = "weather.html";
+      }
     });
   </script>
 </body>

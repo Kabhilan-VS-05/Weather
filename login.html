@@ -55,29 +55,13 @@
       color: #000;
     }
 
-    .progress {
-      height: 12px;
-      margin-top: 10px;
+    .form-control.is-valid {
+      border-color: #198754 !important;
     }
 
-    .progress-bar {
-      background-color: cyan;
+    .form-control.is-invalid {
+      border-color: #dc3545 !important;
     }
-
-    .progress-label {
-      font-size: 0.85rem;
-      text-align: right;
-      color: #80dfff;
-    }
-
-    a {
-      color: cyan;
-    }
-     a:hover {
-      color: rgb(1, 146, 175);
-    }
-
-    
   </style>
 </head>
 <body>
@@ -92,19 +76,25 @@
     <h2 class="text-center mb-4">Login</h2>
     <form id="loginForm" novalidate>
       <div class="mb-3">
-        <label for="loginUsername" class="form-label">Username</label>
-        <input type="text" class="form-control" id="loginUsername" required>
-      </div>
-      <div class="mb-3">
-        <label for="loginPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="loginPassword" required>
+        <label for="loginEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email">
+        <div class="invalid-feedback">Please enter a valid email or username.</div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
 
-      <!-- Progress Bar -->
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" id="loginProgress" style="width: 0%"></div>
+      <div class="mb-3">
+        <label for="loginUsername" class="form-label">Username</label>
+        <input type="text" class="form-control" id="loginUsername" placeholder="Enter your username">
+        <div class="invalid-feedback">Please enter a valid username or email.</div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
-      <div class="progress-label mt-1" id="loginProgressLabel">0%</div>
+
+      <div class="mb-3">
+        <label for="loginPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+        <div class="invalid-feedback">Password is required.</div>
+        <div class="valid-feedback">Password looks good!</div>
+      </div>
 
       <button type="submit" class="btn btn-outline-info w-100 mt-3">Login</button>
       <p class="text-center mt-3">Don't have an account? <a href="signup.html">Sign up</a></p>
@@ -112,21 +102,55 @@
   </div>
 
   <script>
-    const loginFields = ['loginUsername', 'loginPassword'];
-    const loginProgress = document.getElementById('loginProgress');
-    const loginLabel = document.getElementById('loginProgressLabel');
+    const emailInput = document.getElementById("loginEmail");
+    const usernameInput = document.getElementById("loginUsername");
+    const passwordInput = document.getElementById("loginPassword");
+    const form = document.getElementById("loginForm");
 
-    loginFields.forEach(id => {
-      document.getElementById(id).addEventListener('input', updateLoginProgress);
-    });
+    function validateFields() {
+      const email = emailInput.value.trim();
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
 
-    function updateLoginProgress() {
-      const filled = loginFields.filter(id => document.getElementById(id).value.trim() !== '').length;
-      const percent = Math.round((filled / loginFields.length) * 100);
-      loginProgress.style.width = percent + '%';
-      loginLabel.textContent = percent + '%';
+      // Validate email or username (at least one)
+      if (email !== "" || username !== "") {
+        emailInput.classList.remove("is-invalid");
+        usernameInput.classList.remove("is-invalid");
+        emailInput.classList.add("is-valid");
+        usernameInput.classList.add("is-valid");
+      } else {
+        emailInput.classList.remove("is-valid");
+        usernameInput.classList.remove("is-valid");
+        emailInput.classList.add("is-invalid");
+        usernameInput.classList.add("is-invalid");
+      }
+
+      // Validate password
+      if (password !== "") {
+        passwordInput.classList.remove("is-invalid");
+        passwordInput.classList.add("is-valid");
+      } else {
+        passwordInput.classList.remove("is-valid");
+        passwordInput.classList.add("is-invalid");
+      }
     }
-  </script>
 
+    emailInput.addEventListener("input", validateFields);
+    usernameInput.addEventListener("input", validateFields);
+    passwordInput.addEventListener("input", validateFields);
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      validateFields();
+
+      const email = emailInput.value.trim();
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if ((email !== "" || username !== "") && password !== "") {
+        window.location.href = "weather.html";
+      }
+    });
+  </script>
 </body>
 </html>
