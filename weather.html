@@ -94,6 +94,18 @@
     .shadow-lg {
       box-shadow: 0 8px 16px rgba(0,0,0,0.25) !important;
     }
+    @media screen and (min-width: 1000px) {
+      .container {
+        max-width: 60%;
+      }
+      
+    }
+    @media screen and (max-width: 576px) {
+      .container {
+        max-width: 100%;
+      }
+      
+    }
   </style>
 </head>
 <body>
@@ -101,7 +113,7 @@
   <!-- Top Navbar -->
   <nav class="navbar navbar-expand-sm navbar-dark fixed-top shadow">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Weather App</a>
+      <a class="navbar-brand" href="index.html">Weather App</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLinks">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -116,7 +128,8 @@
   </nav>
 
   <!-- Weather Form Section -->
-  <div class="container" style="max-width: 70%;">
+   
+  <div class="container " >
     <h2 class="section-title">Check Weather Details</h2>
     <div class="card-custom">
       <form class="was-validated">
