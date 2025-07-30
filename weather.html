@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="icon" href="https://spire.com/wp-content/uploads/2021/11/spire-global-weather-globe-illustration.png" type="image/png">
   <style>
-    body {
+  body {
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     min-height: 100vh;
     padding-top: 100px;
@@ -17,10 +17,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
-  .navbar, .footer {
-  background: linear-gradient(to right, #002a5b9e, rgb(1, 21, 46));
-}
-
+  .navbar,
+  .footer {
+    background: linear-gradient(to right, #002a5b9e, rgb(1, 21, 46));
+  }
 
   .navbar-brand {
     font-size: 1.4rem;
@@ -28,61 +28,66 @@
     color: #ffffff !important;
   }
 
-    .card-custom {
-      background: rgba(255, 255, 255, 0.025);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.233);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      transition: transform 0.3s ease;
-    }
+  .card-custom {
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.233);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
 
-    .card-custom:hover {
-      transform: scale(1.01);
-    }
+  .card-custom:hover {
+    transform: scale(1.01);
+  }
 
-    .form-control {
-      background-color: rgba(255,255,255,0.1);
-      color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
+  .form-control,
+  .form-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+  }
 
-    .form-control:focus {
-      background-color: rgba(255,255,255,0.2);
-      color: #fff;
-      border-color: #66afe9;
-      box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
-    }
+  .form-control:focus,
+  .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  }
 
-    .form-label {
-      color: #ffffff;
-      font-weight: 500;
-    }
+  .form-label {
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+  }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-weight: bold;
-      color: #f1f1f1;
-    }
+  .section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    color: #f1f1f1;
+  }
 
-    .container a:hover {
-      color: cyan;
-      text-decoration: underline;
-    }
+  .container a:hover {
+    color: cyan;
+    text-decoration: underline;
+  }
 
-    .btn-outline-info {
-      color: cyan;
-      border-color: cyan;
-    }
+  .btn-outline-info {
+    color: cyan;
+    border-color: cyan;
+  }
 
-    .btn-outline-info:hover {
-      background-color: cyan;
-      color: #000;
-    }
+  .btn-outline-info:hover {
+    background-color: cyan;
+    color: #000;
+  }
 
-    .footer .navbar-nav .nav-link {
+  .footer .navbar-nav .nav-link {
     color: #dddddd !important;
   }
 
@@ -91,22 +96,86 @@
     font-size: 0.9rem;
   }
 
-    .shadow-lg {
-      box-shadow: 0 8px 16px rgba(0,0,0,0.25) !important;
+  .shadow-lg {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  /* OR Divider Styling */
+  .text-center.my-3 hr {
+    opacity: 0.5;
+  }
+
+  .text-center.my-3 span {
+    color: cyan;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  /* Date Picker Styling */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+  }
+
+  input[type="date"] {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  input[type="date"]:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+  .form-select {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+  appearance: none;             /* Removes default OS styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem;        /* Space for dropdown arrow */
+  position: relative;
+}
+
+/* When focused */
+.form-select:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: #66afe9;
+  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+/* Fix for dropdown arrow in dark mode */
+.form-select option {
+  background-color: #203a43;
+  color: #ffffff;
+}
+
+
+  /* Spinner Centering */
+  #spinner {
+    margin-top: 10px;
+  }
+
+  /* Responsive Layout */
+  @media screen and (min-width: 1000px) {
+    .container {
+      max-width: 60%;
     }
-    @media screen and (min-width: 1000px) {
-      .container {
-        max-width: 60%;
-      }
-      
+  }
+
+  @media screen and (max-width: 576px) {
+    .container {
+      max-width: 100%;
     }
-    @media screen and (max-width: 576px) {
-      .container {
-        max-width: 100%;
-      }
-      
-    }
-  </style>
+  }
+</style>
+
 </head>
 <body>
 
@@ -129,79 +198,66 @@
 
   <!-- Weather Form Section -->
    
-  <div class="container " >
-    <h2 class="section-title">Check Weather Details</h2>
-    <div class="card-custom">
-      <form class="was-validated">
-        <div class="mb-3">
-          <label for="city" class="form-label">City</label>
-          <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" required>
-          <div class="invalid-feedback">Please enter a city.</div>
-        </div>
+  <!-- Weather Form Section -->
+<div class="container">
+  <h2 class="section-title">Check Weather Details</h2>
+  <div class="card-custom">
+    <form class="was-validated" id="weatherForm">
+  
+      
+      <div class="mb-3">
+  <label for="countrySelect" class="form-label">Country</label>
+  <select class="form-select" id="countrySelect" required>
+    <option value="">-- Select Country --</option>
+  </select>
+  <div class="invalid-feedback">Please select a country.</div>
+</div>
 
-        <div class="mb-3">
-          <label for="country" class="form-label">Country</label>
-          <input type="text" class="form-control" id="country" name="country" placeholder="Enter Country" required>
-          <div class="invalid-feedback">Please enter a country.</div>
-        </div>
+<div class="mb-3">
+  <label for="citySelect" class="form-label">City</label>
+  <select class="form-select" id="citySelect" required>
+    <option value="">-- Select City --</option>
+  </select>
+  <div class="invalid-feedback">Please select a city.</div>
+</div>
 
-        <div class="text-center my-3">
-          <hr class="border-light">
-          <span class="fw-bold">OR</span>
-          <hr class="border-light">
-        </div>
+<input type="hidden" id="latitude" name="latitude">
+<input type="hidden" id="longitude" name="longitude">
 
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label for="latitude" class="form-label">Latitude</label>
-            <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude">
-            <div class="form-text">Optional</div>
-          </div>
-          <div class="col-md-6">
-            <label for="longitude" class="form-label">Longitude</label>
-            <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Longitude">
-            <div class="form-text">Optional</div>
-          </div>
-        </div>
 
-        <div class="text-center my-3">
-          <hr class="border-light">
-          <span class="fw-bold">OR</span>
-          <hr class="border-light">
-        </div>
 
-        <div class="d-grid mb-3">
-          <button type="button" class="btn btn-outline-info shadow-lg" id="gpsBtn">
-            <i class="bi bi-geo-alt-fill me-2"></i>Use Current GPS Location
-          </button>
-        </div>
-        <div class="text-center my-3">
-  <div id="spinner" class="spinner-border text-info d-none" role="status">
-    <span class="visually-hidden">Loading...</span>
+  <div class="text-center my-3">
+    <hr class="border-light">
+    <span class="fw-bold">OR</span>
+    <hr class="border-light">
+  </div>
+
+  <div class="d-grid mb-3">
+    <button type="button" class="btn btn-outline-info shadow-lg" id="gpsBtn">
+      <i class="bi bi-geo-alt-fill me-2"></i>Use Current GPS Location
+    </button>
+  </div>
+
+  <div class="text-center my-3">
+    <div id="spinner" class="spinner-border text-info d-none" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="date" class="form-label text-info fw-bold">Select Date</label>
+    <input type="date" class="form-control" id="date" name="date" required>
+    <div class="invalid-feedback">Please select a date.</div>
+  </div>
+
+  <div class="d-grid">
+    <button type="submit" class="btn btn-primary btn-lg shadow-lg">Submit</button>
+  </div>
+</form>
+
   </div>
 </div>
 
-
-        <div class="mb-4">
-          <label for="date" class="form-label text-info fw-bold">Select Date</label>
-          <input type="date" class="form-control" id="date" name="date" required>
-          <div class="invalid-feedback">Please select a date.</div>
-        </div>
-
-        <div class="d-grid">
-          <button type="submit" class="btn btn-primary btn-lg shadow-lg">Submit</button>
-        </div>
-      </form>
-    </div>
-    <p class="text-center mt-4">
-  <small>
-    If you need to <strong>store</strong> your weather data, please 
-    <a href="login.html" class="text-info">Login</a> or 
-    <a href="signup.html" class="text-info">Sign Up</a>.
-  </small>
-</p>
-
-  </div>
 
   <!-- Footer -->
   <nav class="navbar navbar-expand-sm navbar-dark fixed-bottom footer">
@@ -219,13 +275,206 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
+<script>
+const countryCityData = {
+  "United States": [
+    { name: "New York City", lat: 40.7128, lon: -74.006 },
+    { name: "Los Angeles", lat: 34.0522, lon: -118.2437 },
+    { name: "Chicago", lat: 41.8781, lon: -87.6298 },
+    { name: "Houston", lat: 29.7604, lon: -95.3698 },
+    { name: "San Francisco", lat: 37.7749, lon: -122.4194 }
+  ],
+  "United Kingdom": [
+    { name: "London", lat: 51.5074, lon: -0.1278 },
+    { name: "Manchester", lat: 53.4808, lon: -2.2426 },
+    { name: "Birmingham", lat: 52.4862, lon: -1.8904 },
+    { name: "Glasgow", lat: 55.8642, lon: -4.2518 },
+    { name: "Liverpool", lat: 53.4084, lon: -2.9916 }
+  ],
+  "Canada": [
+    { name: "Toronto", lat: 43.65107, lon: -79.347015 },
+    { name: "Vancouver", lat: 49.2827, lon: -123.1207 },
+    { name: "Montreal", lat: 45.5017, lon: -73.5673 },
+    { name: "Calgary", lat: 51.0447, lon: -114.0719 },
+    { name: "Ottawa", lat: 45.4215, lon: -75.6995 }
+  ],
+  "Australia": [
+    { name: "Sydney", lat: -33.8688, lon: 151.2093 },
+    { name: "Melbourne", lat: -37.8136, lon: 144.9631 },
+    { name: "Brisbane", lat: -27.4698, lon: 153.0251 },
+    { name: "Perth", lat: -31.9505, lon: 115.8605 },
+    { name: "Adelaide", lat: -34.9285, lon: 138.6007 }
+  ],
+  "India": [
+    { name: "Delhi", lat: 28.6139, lon: 77.209 },
+    { name: "Mumbai", lat: 19.076, lon: 72.8777 },
+    { name: "Bengaluru", lat: 12.9716, lon: 77.5946 },
+    { name: "Chennai", lat: 13.0827, lon: 80.2707 },
+    { name: "Hyderabad", lat: 17.385, lon: 78.4867 }
+  ],
+  "Germany": [
+    { name: "Berlin", lat: 52.52, lon: 13.405 },
+    { name: "Munich", lat: 48.1351, lon: 11.582 },
+    { name: "Frankfurt", lat: 50.1109, lon: 8.6821 },
+    { name: "Hamburg", lat: 53.5511, lon: 9.9937 },
+    { name: "Cologne", lat: 50.9375, lon: 6.9603 }
+  ],
+  "France": [
+    { name: "Paris", lat: 48.8566, lon: 2.3522 },
+    { name: "Lyon", lat: 45.764, lon: 4.8357 },
+    { name: "Marseille", lat: 43.2965, lon: 5.3698 },
+    { name: "Toulouse", lat: 43.6047, lon: 1.4442 },
+    { name: "Nice", lat: 43.7102, lon: 7.262 }
+  ],
+  "Japan": [
+    { name: "Tokyo", lat: 35.6895, lon: 139.6917 },
+    { name: "Osaka", lat: 34.6937, lon: 135.5023 },
+    { name: "Kyoto", lat: 35.0116, lon: 135.7681 },
+    { name: "Yokohama", lat: 35.4437, lon: 139.638 },
+    { name: "Nagoya", lat: 35.1815, lon: 136.9066 }
+  ],
+  "China": [
+    { name: "Beijing", lat: 39.9042, lon: 116.4074 },
+    { name: "Shanghai", lat: 31.2304, lon: 121.4737 },
+    { name: "Shenzhen", lat: 22.5431, lon: 114.0579 },
+    { name: "Guangzhou", lat: 23.1291, lon: 113.2644 },
+    { name: "Chengdu", lat: 30.5728, lon: 104.0668 }
+  ],
+  "Brazil": [
+    { name: "São Paulo", lat: -23.5505, lon: -46.6333 },
+    { name: "Rio de Janeiro", lat: -22.9068, lon: -43.1729 },
+    { name: "Brasília", lat: -15.7942, lon: -47.8822 },
+    { name: "Salvador", lat: -12.9714, lon: -38.5014 },
+    { name: "Curitiba", lat: -25.4284, lon: -49.2733 }
+  ],
+  "Russia": [
+    { name: "Moscow", lat: 55.7558, lon: 37.6173 },
+    { name: "Saint Petersburg", lat: 59.9311, lon: 30.3609 },
+    { name: "Novosibirsk", lat: 55.0084, lon: 82.9357 },
+    { name: "Kazan", lat: 55.8304, lon: 49.0661 },
+    { name: "Yekaterinburg", lat: 56.8389, lon: 60.6057 }
+  ],
+  "Italy": [
+    { name: "Rome", lat: 41.9028, lon: 12.4964 },
+    { name: "Milan", lat: 45.4642, lon: 9.19 },
+    { name: "Venice", lat: 45.4408, lon: 12.3155 },
+    { name: "Florence", lat: 43.7696, lon: 11.2558 },
+    { name: "Naples", lat: 40.8518, lon: 14.2681 }
+  ],
+  "South Africa": [
+    { name: "Johannesburg", lat: -26.2041, lon: 28.0473 },
+    { name: "Cape Town", lat: -33.9249, lon: 18.4241 },
+    { name: "Durban", lat: -29.8587, lon: 31.0218 },
+    { name: "Pretoria", lat: -25.7479, lon: 28.2293 },
+    { name: "Port Elizabeth", lat: -33.9608, lon: 25.6022 }
+  ],
+  "South Korea": [
+    { name: "Seoul", lat: 37.5665, lon: 126.978 },
+    { name: "Busan", lat: 35.1796, lon: 129.0756 },
+    { name: "Incheon", lat: 37.4563, lon: 126.7052 },
+    { name: "Daegu", lat: 35.8714, lon: 128.6014 },
+    { name: "Daejeon", lat: 36.3504, lon: 127.3845 }
+  ],
+  "Mexico": [
+    { name: "Mexico City", lat: 19.4326, lon: -99.1332 },
+    { name: "Guadalajara", lat: 20.6597, lon: -103.3496 },
+    { name: "Monterrey", lat: 25.6866, lon: -100.3161 },
+    { name: "Puebla", lat: 19.0414, lon: -98.2063 },
+    { name: "Tijuana", lat: 32.5149, lon: -117.0382 }
+  ],
+  "Egypt": [
+    { name: "Cairo", lat: 30.0444, lon: 31.2357 },
+    { name: "Alexandria", lat: 31.2001, lon: 29.9187 },
+    { name: "Giza", lat: 30.0131, lon: 31.2089 },
+    { name: "Luxor", lat: 25.6872, lon: 32.6396 },
+    { name: "Aswan", lat: 24.0889, lon: 32.8998 }
+  ],
+  "Saudi Arabia": [
+    { name: "Riyadh", lat: 24.7136, lon: 46.6753 },
+    { name: "Jeddah", lat: 21.4858, lon: 39.1925 },
+    { name: "Dammam", lat: 26.4207, lon: 50.0888 },
+    { name: "Mecca", lat: 21.3891, lon: 39.8579 },
+    { name: "Medina", lat: 24.5247, lon: 39.5692 }
+  ],
+  "Turkey": [
+    { name: "Istanbul", lat: 41.0082, lon: 28.9784 },
+    { name: "Ankara", lat: 39.9334, lon: 32.8597 },
+    { name: "Izmir", lat: 38.4192, lon: 27.1287 },
+    { name: "Antalya", lat: 36.8969, lon: 30.7133 },
+    { name: "Bursa", lat: 40.1828, lon: 29.0664 }
+  ]
+};
+
+  // Assuming countryCityData is already declared before this
+
+  const countrySelect = document.getElementById("countrySelect");
+  const citySelect = document.getElementById("citySelect");
+  const latInput = document.getElementById("latitude");
+  const lonInput = document.getElementById("longitude");
+  const dateInput = document.getElementById("date");
+  const form = document.getElementById("weatherForm");
+
+  // Populate Country Dropdown
+  for (const country in countryCityData) {
+    const opt = document.createElement("option");
+    opt.value = country;
+    opt.textContent = country;
+    countrySelect.appendChild(opt);
+  }
+
+  // Update City Dropdown on Country Change
+  countrySelect.addEventListener("change", () => {
+    citySelect.innerHTML = '<option value="">-- Select City --</option>';
+    const selectedCountry = countrySelect.value;
+    if (!selectedCountry) return;
+
+    countryCityData[selectedCountry].forEach(city => {
+      const opt = document.createElement("option");
+      opt.value = city.name;
+      opt.textContent = city.name;
+      opt.dataset.lat = city.lat;
+      opt.dataset.lon = city.lon;
+      citySelect.appendChild(opt);
+    });
+  });
+
+  // Auto-fill lat/lon when city is selected
+  citySelect.addEventListener("change", () => {
+    const selectedOption = citySelect.options[citySelect.selectedIndex];
+    latInput.value = selectedOption.dataset.lat || "";
+    lonInput.value = selectedOption.dataset.lon || "";
+  });
+
+  // Handle Form Submission
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const country = countrySelect.value;
+    const city = citySelect.value;
+    const lat = latInput.value;
+    const lon = lonInput.value;
+    const date = dateInput.value;
+
+    if (!date) {
+      alert("Please select a date.");
+      return;
+    }
+
+    // Must have either city+country OR lat+lon (from GPS)
+    if ((city && country && lat && lon) || (lat && lon)) {
+      const redirectURL = `result.html?latitude=${lat}&longitude=${lon}&city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&date=${date}`;
+      window.location.href = redirectURL;
+    } else {
+      alert("Please select City & Country OR use GPS location.");
+    }
+  });
+
+  // GPS Button Logic
   const gpsBtn = document.getElementById("gpsBtn");
   const spinner = document.getElementById("spinner");
 
-  // Handle GPS Button Click
   gpsBtn.addEventListener("click", () => {
-    const date = document.getElementById("date").value;
+    const date = dateInput.value;
     if (!date) {
       alert("Please select a date before using GPS.");
       return;
@@ -247,12 +496,18 @@
             const city = data.city || data.locality || "Unknown";
             const country = data.countryName || "Unknown";
 
+            // Fill in the form values
+            latInput.value = lat;
+            lonInput.value = lon;
+            countrySelect.value = "";
+            citySelect.innerHTML = '<option value="">-- Select City --</option>';
+
+            // Redirect directly
             const redirectURL = `result.html?latitude=${lat}&longitude=${lon}&city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&date=${date}`;
-            setTimeout(() => {
-              window.location.href = redirectURL;
-            }, 300);
+            window.location.href = redirectURL;
+
           } catch (error) {
-            alert("Failed to reverse geocode your location.");
+            alert("Failed to get location details.");
             console.error(error);
           } finally {
             spinner.classList.add("d-none");
@@ -260,44 +515,19 @@
         },
         () => {
           spinner.classList.add("d-none");
-          alert("Unable to retrieve your location. Please allow GPS access.");
+          alert("Location access denied or failed.");
         }
       );
     } else {
       spinner.classList.add("d-none");
-      alert("Geolocation is not supported by your browser.");
+      alert("Geolocation not supported in this browser.");
     }
-  });
-
-  // Handle Manual Form Submission
-  document.querySelector("form").addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent default form submission
-
-    const city = document.getElementById("city").value.trim();
-    const country = document.getElementById("country").value.trim();
-    const lat = document.getElementById("latitude").value.trim();
-    const lon = document.getElementById("longitude").value.trim();
-    const date = document.getElementById("date").value;
-
-    if (!date) {
-      alert("Please select a date.");
-      return;
-    }
-
-    let redirectURL = `result.html?date=${date}`;
-
-    if (city && country) {
-      redirectURL += `&city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}`;
-    } else if (lat && lon) {
-      redirectURL += `&latitude=${lat}&longitude=${lon}`;
-    } else {
-      alert("Please enter either city and country or latitude and longitude.");
-      return;
-    }
-
-    window.location.href = redirectURL;
   });
 </script>
+
+
+
+
 
 </body>
 </html>

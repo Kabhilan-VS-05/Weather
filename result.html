@@ -8,34 +8,100 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="icon" href="https://spire.com/wp-content/uploads/2021/11/spire-global-weather-globe-illustration.png" type="image/png">
   <style>
-    body {
-      background: linear-gradient(135deg, #6c757d, #343a40);
-      min-height: 100vh;
-      padding-top: 100px;
-      padding-bottom: 100px;
-      transition: background 1s ease-in-out;
-      color: white;
-    }
+  body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    color: #f1f1f1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background 1s ease-in-out;
+  }
 
-    .card {
-      background-color: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-radius: 1rem;
-      padding: 2rem;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
+  .navbar, .footer {
+    background: linear-gradient(to right, #002a5b9e, rgb(1, 21, 46));
+  }
 
+  .navbar-brand {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffffff !important;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    padding: 2rem;
+    color: #ffffff;
+  }
+
+  .weather-icon {
+    font-size: 60px;
+    color: cyan;
+  }
+
+  #temperature {
+    font-size: 3rem;
+    font-weight: bold;
+    color: cyan;
+  }
+
+  #description {
+    color: #f8f9fa;
+    font-weight: 500;
+  }
+
+  .text-light {
+    color: #ddd !important;
+  }
+
+  .navbar-nav .nav-link {
+    color: #ddd !important;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: cyan !important;
+  }
+
+  .footer .navbar-brand {
+    font-size: 0.9rem;
+    color: #cccccc !important;
+  }
+
+  .footer .nav-link {
+    font-size: 0.85rem;
+    color: #aaa !important;
+  }
+
+  .footer .nav-link:hover {
+    color: cyan !important;
+  }
+
+  .d-flex div {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 576px) {
     .weather-icon {
-      font-size: 60px;
+      font-size: 40px;
     }
-  </style>
+    #temperature {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
 </head>
 <body>
 
 <!-- Top Navbar -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top shadow">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Weather App</a>
+    <a class="navbar-brand" href="index.html">Weather App</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLinks" aria-controls="navbarLinks" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -56,8 +122,13 @@
       <div class="card text-center">
         <h2 class="mb-4">Weather Report</h2>
         <div class="weather-icon mb-3"><i class="bi bi-cloud-sun-fill" id="weather-icon"></i></div>
-        <h3 id="location">--</h3>
-        <p id="datetime">--</p>
+        <h3 id="location" class="text-light text-center"></h3>
+        <p id="datetime" class="text-light text-center mb-4"></p>
+        <p class="text-light text-center">
+          Latitude: <span id="latValue"></span> |
+          Longitude: <span id="lonValue"></span>
+        </p>
+
         <h1 id="temperature">-- °C</h1>
         <p id="description" class="fs-5">--</p>
         <div class="d-flex justify-content-around mt-3">
@@ -70,10 +141,10 @@
 </div>
 
 <!-- Bottom Navbar -->
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-bottom">
-  <div class="container-fluid d-none d-sm-flex justify-content-between">
-    <ul class="navbar-nav">
-      <li class="nav-item"><a class="nav-link small" href="#">Whatsapp</a></li>
+<nav class="navbar navbar-expand-sm navbar-dark fixed-bottom footer">
+  <div class="container-fluid">
+    <ul class="navbar-nav d-none d-sm-flex justify-content-between">
+      <li class="nav-item"><a class="nav-link small" href="#">WhatsApp</a></li>
       <li class="nav-item"><a class="nav-link small" href="#">Facebook</a></li>
       <li class="nav-item"><a class="nav-link small" href="#">Mail</a></li>
     </ul>
@@ -88,6 +159,23 @@
   const country = params.get('country');
   const lat = params.get('latitude');
   const lon = params.get('longitude');
+  if ((!city || !country) && lat && lon) {
+  const reverseURL = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
+  fetch(reverseURL)
+    .then(res => res.json())
+    .then(data => {
+      const detectedCity = data.city || data.locality || lat;
+      const detectedCountry = data.countryName || lon;
+      document.getElementById('location').textContent = `${detectedCity}, ${detectedCountry}`;
+    })
+    .catch(err => {
+      console.warn("Reverse geocode failed:", err);
+      document.getElementById('location').textContent = `Lat: ${lat}, Lon: ${lon}`;
+    });
+} else {
+  document.getElementById('location').textContent = `${city}, ${country}`;
+}
+
   const date = params.get('date');
 
   console.log("Parsed params:", { city, country, lat, lon, date });
@@ -95,9 +183,17 @@
   // Set location and date info
   const locationEl = document.getElementById('location');
   const datetimeEl = document.getElementById('datetime');
+  // Also show raw lat/lon values
+document.getElementById('latValue').textContent = lat || '--';
+document.getElementById('lonValue').textContent = lon || '--';
+
 
   if (locationEl && datetimeEl) {
-    locationEl.textContent = `${city || lat}, ${country || lon}`;
+    if (city && country) {
+      locationEl.textContent = `${city}, ${country}`;
+    } else {
+      locationEl.textContent = `Lat: ${lat}, Lon: ${lon}`;
+    }
     datetimeEl.textContent = `Date: ${date || new Date().toISOString().split("T")[0]}`;
   }
 
@@ -109,53 +205,66 @@
   const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relative_humidity_2m,windspeed_10m,weathercode&timezone=auto`;
 
   fetch(apiUrl)
-    .then(res => res.json())
-    .then(data => {
-      console.log("Weather API response:", data);
+  .then(res => res.json())
+  .then(data => {
+    console.log("Weather API response:", data);
 
-      const hour = new Date().getHours();
-      const temp = data.hourly?.temperature_2m?.[hour];
-      const hum = data.hourly?.relative_humidity_2m?.[hour];
-      const wind = data.hourly?.windspeed_10m?.[hour];
-      const code = data.hourly?.weathercode?.[hour];
+    const hour = new Date().getHours();
+    const temp = data.hourly?.temperature_2m?.[hour];
+    const hum = data.hourly?.relative_humidity_2m?.[hour];
+    const wind = data.hourly?.windspeed_10m?.[hour];
+    const code = data.hourly?.weathercode?.[hour];
 
-      if ([temp, hum, wind, code].some(val => val === undefined)) {
-        alert("Weather data not available for this time. Try another date.");
-        return;
-      }
+    if ([temp, hum, wind, code].some(val => val === undefined)) {
+      alert("Weather data not available for this time. Try another date.");
+      return;
+    }
 
-      // Display data
-      document.getElementById('temperature').textContent = `${temp} °C`;
-      document.getElementById('humidity').textContent = `${hum}%`;
-      document.getElementById('wind').textContent = `${wind} km/h`;
+    document.getElementById('temperature').textContent = `${temp} °C`;
+    document.getElementById('humidity').textContent = `${hum}%`;
+    document.getElementById('wind').textContent = `${wind} km/h`;
 
-      let desc = "Unknown", icon = "bi-cloud-fill", bg = "#343a40";
+    let desc = "Unknown", icon = "bi-cloud-fill", bg = "#343a40";
 
-      if ([0, 1].includes(code)) {
-        desc = "Clear Sky"; icon = "bi-sun-fill";
-        bg = "linear-gradient(to right, #f7b733, #fc4a1a)";
-      } else if ([2, 3].includes(code)) {
-        desc = "Cloudy"; icon = "bi-cloud-sun-fill";
-        bg = "linear-gradient(to right, #bdc3c7, #2c3e50)";
-      } else if ([45, 48].includes(code)) {
-        desc = "Foggy"; icon = "bi-cloud-fog2-fill";
-        bg = "linear-gradient(to right, #757f9a, #d7dde8)";
-      } else if ([51, 61, 63, 65].includes(code)) {
-        desc = "Rainy"; icon = "bi-cloud-rain-fill";
-        bg = "linear-gradient(to right, #0052D4, #4364F7, #6FB1FC)";
-      } else if ([71, 73, 75].includes(code)) {
-        desc = "Snowy"; icon = "bi-cloud-snow-fill";
-        bg = "linear-gradient(to right, #83a4d4, #b6fbff)";
-      }
+    // Weather code-based mapping
+    if ([0, 1].includes(code)) {
+      desc = "Clear Sky"; icon = "bi-sun-fill";
+    } else if ([2, 3].includes(code)) {
+      desc = "Cloudy"; icon = "bi-cloud-sun-fill";
+    } else if ([45, 48].includes(code)) {
+      desc = "Foggy"; icon = "bi-cloud-fog2-fill";
+    } else if ([51, 61, 63, 65].includes(code)) {
+      desc = "Rainy"; icon = "bi-cloud-rain-fill";
+    } else if ([71, 73, 75].includes(code)) {
+      desc = "Snowy"; icon = "bi-cloud-snow-fill";
+    } else if ([95, 96, 99].includes(code)) {
+      desc = "Thunderstorm"; icon = "bi-cloud-lightning-rain-fill";
+    }
 
-      document.getElementById('description').textContent = desc;
-      document.getElementById('weather-icon').className = `bi ${icon}`;
-      document.body.style.background = bg;
-    })
-    .catch(err => {
-      console.error("Weather fetch failed:", err);
-      alert("Could not fetch weather data.");
-    });
+    // Temperature-based background change
+    if (temp >= 35) {
+  bg = "linear-gradient(135deg, #330000, #660000)";  // Very hot (dark red)
+} else if (temp >= 28) {
+  bg = "linear-gradient(135deg, #4b1d06, #8a3e0d)";  // Hot (dark orange)
+} else if (temp >= 20) {
+  bg = "linear-gradient(135deg, #123456, #1c5c91)";  // Warm (blue tone)
+} else if (temp >= 10) {
+  bg = "linear-gradient(135deg, #0c2b4c, #264e70)";  // Cool (blue-grey)
+} else {
+  bg = "linear-gradient(135deg, #0f0f3d, #3c3c70)";  // Cold (dark blue-violet)
+}
+
+
+    // Apply styles
+    document.getElementById('description').textContent = desc;
+    document.getElementById('weather-icon').className = `bi ${icon}`;
+    document.body.style.background = bg;
+  })
+  .catch(err => {
+    console.error("Weather fetch failed:", err);
+    alert("Could not fetch weather data.");
+  });
+
 </script>
 
 
